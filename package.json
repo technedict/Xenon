@@ -11,12 +11,22 @@
   "name": "xenon_online_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LowkeyDev01/xenon_backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LowkeyDev01/xenon_backend/issues"
+  },
+  "homepage": "https://github.com/LowkeyDev01/xenon_backend#readme"
 }
