@@ -6,8 +6,8 @@ import { generateBaches } from "./utils/code_gen.js";
 const app = express();
 app.use(express.json());
 
-app.post('/beat', (req, res) => {
-  res.json('working')
+app.post('/health', (req, res) => {
+  res.status.json('ts is running!');
 })
 
 app.post('/code-gen', async (req, res) => {
