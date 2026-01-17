@@ -30,7 +30,7 @@ app.post('/pay/verify', async (req, res) => {
     return res.status(400).json({ error: "Payment not Verified" })
   }
   try {
-    const codeResult = onlineDBClient.query('SELECT code_string FROM codes WHERE is_bought = false LIMIT 1')
+    const codeResult = await onlineDBClient.query('SELECT code_string FROM codes WHERE is_bought = false LIMIT 1')
 
     if (codeResult.rows.length === 0) {
       return res.status(500).json({ error: "no codes available" })
