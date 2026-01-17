@@ -1,11 +1,14 @@
 import express from "express";
 import dotenv from 'dotenv';
+import cors from 'cors'
+
 dotenv.config();
 import { generateBaches } from "./utils/code_gen.js";
 import { onlineDBClient } from "./db.js";
 
 const app = express();
 app.use(express.json());
+app.use(cors())
 
 app.post('/health', (req, res) => {
   res.status.send('ts is running!');
