@@ -14,9 +14,9 @@ app.get('/health', (req, res) => {
   res.send('Server is running!');
 })
 
-app.post('/pay/verify', async (req, res) => {
+app.post('/pay/verify/user', async (req, res) => {
   try {
-    const { reference } = req.body;
+    const { reference, role } = req.body;
 
     const paystackRes = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
       headers: {
@@ -29,7 +29,7 @@ app.post('/pay/verify', async (req, res) => {
     if (result.data.status !== "success") {
       return res.status(400).json({ error: "Payment not Verified" })
     }
-    const codeResult = await onlineDBClient.query('SELECT code_string FROM codes WHERE is_bought = false LIMIT 1')
+    const codeResult = await onlineDBClient.query('SELECT code_string FROM codes WHERE is_bought = false AND account_type = $1 LIMIT 1', [role])
 
     if (codeResult.rows.length === 0) {
       return res.status(500).json({ error: "no codes available" })
@@ -44,7 +44,6 @@ app.post('/pay/verify', async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 })
-
 app.post('/code-gen', async (req, res) => {
   try {
     const { users, creators } = req.body
